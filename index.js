@@ -1,11 +1,10 @@
 var fs = require('fs');
 var http = require('http');
 var port = Number(process.env.PORT || 8080);
+var data = fs.readFileSync('public/index.html');
 
-http.createServer(function(req, res){
-	fs.readFile('public/index.html', function (err, data){
-		res.writeHead(200, {'Content-Type': 'text/html', 'Content-Length': data.length});
-		res.write(data);
-		res.end();
+var server = http.createServer(function(req, res){
+	res.writeHead(200, {"Content-Type": "text/html"});
+	res.end(data);
 	});
-}).listen(8080);
+server.listen(8080);
